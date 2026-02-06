@@ -14,5 +14,7 @@ class WorkerController extends Controller
      public function show()
     {
         return 'This is show worker Controller';
+
+        
     }
 }
