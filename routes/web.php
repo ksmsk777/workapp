@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/workers', [WorkerController::class, 'index']);
+Route::get('/workers/show', [WorkerController::class, 'show']);
