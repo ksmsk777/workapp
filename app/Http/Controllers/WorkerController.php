@@ -2,38 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Worker\StoreRequest;
 use App\Models\Worker;
 use Illuminate\Http\Request;
+
+use function Ramsey\Uuid\v1;
 
 class WorkerController extends Controller
 {
     public function index()
     {
         $workers = Worker::all();
-        dd($workers);
+        return view('worker.index', compact('workers'));
 
     }
 
-     public function show()
+     public function show(Worker $worker)
     {
-         $worker = Worker::find(2);
-         dd($worker->toarray() );
-                
+        return view('worker.show', compact('worker'));
+                         
     }
+      public function store(StoreRequest $request)
+      {
+        $data = $request->validated();
+        
+        $data['is_married'] = isset($data['is_married']) ? true : false;
+
+        Worker::create($data);
+        
+        return redirect()->route('worker.index');
+      }
+     
+     
       public function create()
     {
-        $worker =    [
-        'name' => 'Mark',
-        'surname' => 'Markov',
-        'email' => 'marko@ya.ru',
-        'age' => '20',
-        'description' => 'some  t amet.', 
-        'is_married' => 'false',
-        ];     
-
-        Worker::create($worker);
-        
-        return 'Worker was created';
+       return view('worker.create');
         
     }
       public function update()
