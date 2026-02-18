@@ -21,6 +21,16 @@
             <div> <strong>Is married:</strong> {{$worker->is_married}}</div>
             <div style="margin-top:10px">
                 <a href="{{route('worker.show', $worker->id)}}">Просмотреть</a>
+                <div><a href="{{route('worker.edit', $worker->id)}}">Редактировать</a></div>
+                <div>
+
+                </div>
+                <form action="{{route('worker.delete', $worker->id)}}" method="post">
+                    @csrf
+                    @method('Delete')
+                    <input type="submit" value="Удалить">
+
+                </form>
             </div>
         </div></p>        
              <hr>
